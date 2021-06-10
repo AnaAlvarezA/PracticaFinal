@@ -1,0 +1,108 @@
+<!-- Title group  -->
+<div class="title-group">
+  <h1 class="mat-h1">Añadir contacto</h1>
+  <mat-divider fxFlex="1 0"></mat-divider>
+</div>
+
+<!-- Form -->
+<div class="inner-wrapper">
+  <form [formGroup]="contactForm" (ngSubmit)="updateContactForm()" #resetStudentForm="ngForm" novalidate>
+    <mat-card>
+              
+        <!-- Name -->
+        <div>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Nombre" formControlName="name">
+          <mat-error *ngIf="handleError('name', 'required')">
+            El nombre no puede incluir números y la longitude debes ser superior a 3
+          </mat-error>
+        </mat-form-field>
+      </div>
+  
+        <!-- Surnames -->
+        <div>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Apellido/s" formControlName="surnames">
+          <mat-error *ngIf="handleError('surnames', 'required')">
+            Los apellidos no puede incluir números y la longitude debes ser superior a 3
+          </mat-error>
+        </mat-form-field>
+      </div>
+  
+        <!-- Age -->
+        <div>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Edad" formControlName="age">
+          <mat-error *ngIf="handleError('age', 'required')">
+            La edad debe ser un número comprendido entre 0 y 125
+          </mat-error>
+        </mat-form-field>
+      </div>
+  
+        <!-- DNI -->
+        <div>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="DNI" formControlName="dni">
+          <mat-error *ngIf="handleError('dni', 'required')">
+            El dni debe ser una cadena alfanumérica de 9 caracteres
+          </mat-error>
+        </mat-form-field>
+        </div>
+  
+        <!-- Sex -->
+        <div class="misc-bottom-padding">
+          <mat-label>Sexo:</mat-label>
+          <mat-radio-group aria-label="Selecciona el sexo" formControlName="sex">
+            <mat-radio-button value="1">Hombre</mat-radio-button>
+            <mat-radio-button value="2">Mujer</mat-radio-button>
+            <mat-radio-button value="3">Otro</mat-radio-button>
+            <mat-radio-button value="4">No Especificado</mat-radio-button>
+          </mat-radio-group>
+        </div>
+  
+        <!-- FavouriteColour -->
+        <div>
+        <mat-form-field>
+          <mat-label>Color Favorito</mat-label>
+          <mat-select [(value)]="selectable" formControlName="favouriteColour">
+            <mat-option [value]="favouriteColour" *ngFor="let favouriteColour of favouriteColours">{{favouriteColour}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="handleError('favouriteColour', 'required')">
+            Tienes que escoger un color
+          </mat-error>
+        </mat-form-field>
+        </div>  
+  
+        <!-- Date of birthday-->
+        <div>
+        <mat-form-field>
+          <input matInput readonly [matDatepicker]="picker" placeholder="Fecha de cumpleaños" formControlName="birthday"
+            (dateChange)="formatDate($event)">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          <mat-error *ngIf="handleError('birthday', 'required')">
+            Pon tu fecha de cumpleaños
+          </mat-error>
+        </mat-form-field>
+        </div>
+  
+        <!-- Notes -->
+        <div>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Comentario" formControlName="notes">
+          <mat-error *ngIf="handleError('notes', 'required')">
+            Las notas deben tener más de 3 caracteres
+          </mat-error>
+        </mat-form-field>
+        </div>
+
+    <!-- Submit & Reset -->
+    <mat-card>
+      <div class="full-wrapper button-wrapper">
+        <div class="button-wrapper">
+          <button mat-flat-button color="warn">Modificar</button>
+        </div>
+      </div>
+    </mat-card>
+ 
